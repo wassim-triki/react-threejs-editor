@@ -31,9 +31,28 @@ const Editor = () => {
       case "filepicker":
         return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
       case "aipicker":
-        return <AIPicker />;
+        return (
+          <AIPicker
+            prompt={prompt}
+            setPrompt={setPrompt}
+            generatingImage={generatingImage}
+            handleSubmit={handleSubmit}
+          />
+        );
       default:
         return null;
+    }
+  };
+
+  const handleSubmit = async (type) => {
+    if (!prompt) return alert("Please enter a prompt");
+
+    try {
+      //call backend to gen image
+    } catch (error) {
+    } finally {
+      setGeneratingImage(false);
+      setActivEditorTab("");
     }
   };
 
