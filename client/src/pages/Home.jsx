@@ -14,7 +14,6 @@ import { CustomBtn } from "../components";
 
 const Home = () => {
   const snap = useSnapshot(state);
-  console.log(snap);
   return (
     <AnimatePresence>
       {snap.inHomePage && (
