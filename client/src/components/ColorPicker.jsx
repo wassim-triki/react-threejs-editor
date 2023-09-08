@@ -10,7 +10,6 @@ const ColorPicker = () => {
         color={snap.accentColor}
         disableAlpha
         onChange={(color) => {
-          console.log(color);
           state.accentColor = color.hex;
         }}
         // presetColors={[

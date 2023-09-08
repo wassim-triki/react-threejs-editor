@@ -2,6 +2,8 @@ import React from "react";
 import { useSnapshot } from "valtio";
 import state from "../store";
 
+import { getContrastingColor } from "../config/helpers";
+
 const CustomBtn = ({
   className,
   title,
@@ -13,7 +15,13 @@ const CustomBtn = ({
     if (variant === "contained") {
       return {
         backgroundColor: snap.accentColor,
-        color: "#fff",
+        color: getContrastingColor(snap.accentColor),
+      };
+    } else if (variant === "outline") {
+      return {
+        borderWidth: "1px",
+        borderColor: snap.accentColor,
+        color: snap.accentColor,
       };
     }
   };
