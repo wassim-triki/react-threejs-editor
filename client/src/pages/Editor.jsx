@@ -13,6 +13,7 @@ import {
   Tab,
 } from "../components";
 import { reader } from "../config/helpers";
+import config from "../config/config";
 const Editor = () => {
   const snap = useSnapshot(state);
 
@@ -48,7 +49,20 @@ const Editor = () => {
     if (!prompt) return alert("Please enter a prompt");
 
     try {
+      setGeneratingImage(true);
       //call backend to gen image
+
+      const response = await fetch(config.development.backendUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt }),
+      });
+
+      const data = await response.json();
+
+      handleDecals(type, `data:image/png;base64,${data.image}`);
     } catch (error) {
     } finally {
       setGeneratingImage(false);
@@ -72,9 +86,11 @@ const Editor = () => {
         break;
       case "stylishShirt":
         state.isFullTexture = !activeFilterTab[tabName];
+        break;
       default:
         state.isLogoTexture = true;
         state.isFullTexture = false;
+        break;
     }
 
     setActiveFilterTab((prev) => ({ ...prev, [tabName]: !prev[tabName] }));
