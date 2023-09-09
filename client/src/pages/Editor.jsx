@@ -52,7 +52,7 @@ const Editor = () => {
       setGeneratingImage(true);
       //call backend to gen image
 
-      const response = await fetch(config.development.backendUrl, {
+      const response = await fetch(config.backendUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
